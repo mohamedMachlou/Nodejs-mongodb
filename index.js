@@ -23,7 +23,21 @@ const clientShema = new mongoose.Schema({
 const Client = mongoose.model('Client', clientShema);
 
 // Create new client
-async function createClient() {
+// async function createClient() {
+//     const client = new Client( {
+//         firstName: 'Machlou',
+//         lastName: 'Mohamed',
+//         phoneNumber: '0653508459',
+//         tags: ['Web Developer', 'fullstack', 'Nodejs'],
+//     })
+    
+//     const result = await client.save();
+
+//     console.log(result);
+// }
+
+// Create new client
+function createClient() {
     const client = new Client( {
         firstName: 'Machlou',
         lastName: 'Mohamed',
@@ -31,9 +45,11 @@ async function createClient() {
         tags: ['Web Developer', 'fullstack', 'Nodejs'],
     })
     
-    const result = await client.save();
+    client.save()
+    .then((result) => console.log(result))
+    .catch((err) => console.log(err));
+    
 
-    console.log(result);
 }
 
 createClient()
