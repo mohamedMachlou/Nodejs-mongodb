@@ -1,7 +1,12 @@
 const mongoose = require('mongoose');
 
+// Connection to mongo database On line 
+// mongoose.connect('mongodb+srv://medmachlou:feAWyX7CnDVGW1yZ@cluster0.nmuzflm.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0')
+//     .then(() =>  console.log('Mongo Database connected ...'))
+//     .catch((err) =>  console.error('db could not connect ...'))
 
-mongoose.connect('mongodb+srv://medmachlou:feAWyX7CnDVGW1yZ@cluster0.nmuzflm.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0')
+// Connection to mongo database 
+mongoose.connect('mongodb://127.0.0.1:27018/clientsDB')
     .then(() =>  console.log('Mongo Database connected ...'))
     .catch((err) =>  console.error('db could not connect ...'))
 
@@ -9,20 +14,26 @@ mongoose.connect('mongodb+srv://medmachlou:feAWyX7CnDVGW1yZ@cluster0.nmuzflm.mon
 const clientShema = new mongoose.Schema({
     firstName: String,
     lastName: String,
-    phoneNumber: Number,
+    phoneNumber: String,
     dateNaissance: { type: Date, dafault: Date.now},
     tags: [String],
 })
 
 // Client Model
-
 const Client = mongoose.model('Client', clientShema);
 
-const client = new Client( {
-    firstName: 'Machlou',
-    lastName: 'Mohamed',
-    phoneNumber: '0653508459',
-    tags: ['Web Developer', 'fullstack', 'Nodejs'],
-})
+// Create new client
+async function createClient() {
+    const client = new Client( {
+        firstName: 'Machlou',
+        lastName: 'Mohamed',
+        phoneNumber: '0653508459',
+        tags: ['Web Developer', 'fullstack', 'Nodejs'],
+    })
+    
+    const result = await client.save();
 
-client.save();
+    console.log(result);
+}
+
+createClient()
