@@ -35,21 +35,34 @@ const Client = mongoose.model('Client', clientShema);
 
 //     console.log(result);
 // }
-
+/////////////////////////////////////////////////////////////////////////////////
 // Create new client
-function createClient() {
-    const client = new Client( {
-        firstName: 'Machlou',
-        lastName: 'Mohamed',
-        phoneNumber: '0653508459',
-        tags: ['Web Developer', 'fullstack', 'Nodejs'],
-    })
-    
-    client.save()
-    .then((result) => console.log(result))
-    .catch((err) => console.log(err));
-    
+// function createClient() {
+    //     const client = new Client( {
+        //         firstName: 'Machlou',
+        //         lastName: 'Mohamed',
+        //         phoneNumber: '0653508459',
+        //         tags: ['Web Developer', 'fullstack', 'Nodejs'],
+        //     })
+        
+        //     client.save()
+        //     .then((result) => console.log(result))
+        //     .catch((err) => console.log(err));
+// }
+// createClient();
+
+/////////////////////////////////////////////////////////////////////////////////
+
+// Get all Clients
+async function getClients(){
+    const clients = await Client.find();
+    console.log(clients);
 
 }
 
-createClient()
+getClients();
+
+
+
+
+
