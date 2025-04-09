@@ -12,11 +12,11 @@ mongoose.connect('mongodb://127.0.0.1:27018/clientsDB')
 
 /// Client Schema
 const clientShema = new mongoose.Schema({
-    firstName: {type: String, required: true},
-    lastName: String,
+    firstName: {type: String,uppercase: true, required: true},
+    lastName:  {type: String,uppercase: true, required: true},
     salary: {
             type: Number,
-            min: 4,
+            min: 5000,
             max: 9999999999999999999999999,
     },
     phoneNumber: {
@@ -52,18 +52,24 @@ const Client = mongoose.model('Client', clientShema);
 
 /////////////////////////////////////////////////////////////////////////////////
 // Create new client
-function createClient() {
+async function createClient() {
         const client = new Client( {
                 firstName: 'Mohamed',
                 lastName: 'Mohamed',
-                phoneNumber: '065350885',
-                salary: 80090,
+                phoneNumber: '0653508858',
+                salary: 297987,
                 tags: ['Web Developer','Angular', 'Expressjs', 'fullstack', 'Nodejs'],
             })
         
-            client.save()
-            .then((result) => console.log(result))
-            .catch((err) => console.log(err));
+            try {
+                const result = await client.save()
+                console.log(result)
+
+            }
+            catch(err){
+                
+                console.log("Create new client error : ", err.errors);
+            }
 }
 
 createClient();
