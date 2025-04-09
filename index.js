@@ -12,8 +12,8 @@ mongoose.connect('mongodb://127.0.0.1:27018/clientsDB')
 
 /// Client Schema
 const clientShema = new mongoose.Schema({
-    firstName: {type: String,uppercase: true, required: true},
-    lastName:  {type: String,uppercase: true, required: true},
+    firstName: {type: String,uppercase: true,trim: true, required: true},
+    lastName:  {type: String,uppercase: true,trim: true, required: true},
     salary: {
             type: Number,
             min: 5000,
@@ -54,8 +54,8 @@ const Client = mongoose.model('Client', clientShema);
 // Create new client
 async function createClient() {
         const client = new Client( {
-                firstName: 'Mohamed',
-                lastName: 'Mohamed',
+                firstName: ' Sara ',
+                lastName: ' benhadou ',
                 phoneNumber: '0653508858',
                 salary: 297987,
                 tags: ['Web Developer','Angular', 'Expressjs', 'fullstack', 'Nodejs'],
