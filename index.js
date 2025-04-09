@@ -12,10 +12,10 @@ mongoose.connect('mongodb://127.0.0.1:27018/clientsDB')
 
 /// Client Schema
 const clientShema = new mongoose.Schema({
-    firstName: String,
+    firstName: {type: String, required: true},
     lastName: String,
-    phoneNumber: String,
     salary: Number,
+    phoneNumber: {type: String, required: function(){ return this.salary >= 10000} },
     dateNaissance: { type: Date, dafault: Date.now},
     tags: [String],
 })
@@ -45,7 +45,7 @@ function createClient() {
                 firstName: 'Mohamed',
                 lastName: 'Mohamed',
                 phoneNumber: '065350885',
-                salary: 89,
+                salary: 80090,
                 tags: ['Web Developer','Angular', 'Expressjs', 'fullstack', 'Nodejs'],
             })
         
@@ -54,7 +54,7 @@ function createClient() {
             .catch((err) => console.log(err));
 }
 
-// createClient();
+createClient();
 
 
 /////////////////////////////////////////////////////////////////////////////////
@@ -133,7 +133,7 @@ async function updateClient(id){
     console.log('client updated : ',client)
 }
 
-updateClient('67f3a7baa3a86e1eb1f6b46d');
+// updateClient('67f3a7baa3a86e1eb1f6b46d');
 
 
 
