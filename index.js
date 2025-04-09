@@ -14,9 +14,21 @@ mongoose.connect('mongodb://127.0.0.1:27018/clientsDB')
 const clientShema = new mongoose.Schema({
     firstName: {type: String, required: true},
     lastName: String,
-    salary: Number,
-    phoneNumber: {type: String, required: function(){ return this.salary >= 10000} },
-    dateNaissance: { type: Date, dafault: Date.now},
+    salary: {
+            type: Number,
+            min: 4,
+            max: 9999999999999999999999999,
+    },
+    phoneNumber: {
+                type: String, 
+                required: function(){ return this.salary >= 10000},
+                minlength: 8,
+                maxlength: 15,
+            },
+    dateNaissance: {
+                     type: Date, 
+                     dafault: Date.now
+                    },
     tags: [String],
 })
 
